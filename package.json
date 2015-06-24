@@ -1,0 +1,15 @@
+{
+  "name": "dslink-javascript-salesforce",
+  "version": "0.0.1",
+  "description": "DSLink for Salesforce API",
+  "main": "salesforce.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsforce": "^1.4.1",
+    "sdk-dslink-javascript": "git+http://github.com/IOT-DSA/sdk-dslink-javascript.git#artifacts"
+  }
+}
