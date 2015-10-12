@@ -20,7 +20,7 @@ node salesforce.js --broker BROKER_URL --log LOG_LEVEL
 This action will create an Account Node under `/salesforce/` with the name given in the params
 
 PARAMS
-```json
+```javascript
 [{
   "name": "sandbox",
   "type": "bool",
@@ -32,12 +32,12 @@ PARAMS
   "default": ""
 },
 {
-  "name": "username",
+  "name": "username", // The username of the associated salesforce account
   "type": "string",
   "default": ""
 },
 {
-  "name": "password",
+  "name": "password", // The concatenated password & security token of the associated salesforce account
   "type": "string",
   "default": ""
 }]
