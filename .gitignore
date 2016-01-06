@@ -1,2 +1,5 @@
 .dslink.key
+.dslink.md5
+nodes.json
+
 node_modules

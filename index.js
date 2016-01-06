@@ -1,11 +1,10 @@
-var DS = require('dslink'),
-	jsforce = require('jsforce');
+var DS = require('dslink');
+var jsforce = require('jsforce');
 
-var context = require('./lib/context'),
-	Account = require('./lib/account'),
-	Query = require('./lib/query'),
-  crud = require('./lib/crud');
-
+var context = require('./lib/context');
+var account = require('./lib/account');
+var Query = require('./lib/query').Query;
+var crud = require('./lib/crud');
 
 var link = new DS.LinkProvider(process.argv.slice(2), 'salesforce-', {
   defaultNodes: {
@@ -38,27 +37,38 @@ var link = new DS.LinkProvider(process.argv.slice(2), 'salesforce-', {
     }
   },
   profiles: {
+    account: function(path, provider) {
+      return new account.Account(path, provider);
+    },
     addAccount: function(path, provider) {
-      return new Account(path);
+      return new account.AddAccount(path, provider);
     },
     querySF: function(path, provider) {
-      return new Query(path);
+      return new Query(path, provider);
     },
     retrieveObject: function(path, provider) {
-      return new crud.Retrieve(path);
+      return new crud.Retrieve(path, provider);
     },
     updateObject: function(path, provider) {
-      return new crud.Update(path);
+      return new crud.Update(path, provider);
     },
     createObject: function(path, provider) {
-      return new crud.Create(path);
+      return new crud.Create(path, provider);
     },
     deleteObject: function(path, provider) {
-      return new crud.Delete(path);
+      return new crud.Delete(path, provider);
     }
   }
 });
 
+link.init();
+
+var saving = false;
 link.connect().then(function() {
-  context.link = link;
+  if(!saving) {
+    setInterval(function() {
+      link.save();
+    }, 1000 * 5);
+  }
+  saving = true;
 });
