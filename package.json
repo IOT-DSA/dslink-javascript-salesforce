@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "dslink": "git://github.com/IOT-DSA/sdk-dslink-javascript.git#artifacts",
+    "dslink": "^1.0.0",
     "es6-promise": "^3.0.2",
     "jsforce": "^1.4.1"
   }
